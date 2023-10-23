@@ -1,4 +1,8 @@
 
+using CRUD.Common.Interfaces;
+using CRUD.Common.Models;
+using CRUD.Repositories;
+
 namespace CRUD
 {
     public class Program
@@ -8,11 +12,14 @@ namespace CRUD
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<ApplicationContext>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddTransient<IBaseCrudRepository<User>, BaseCrudRepository<User>>();
 
             var app = builder.Build();
 
@@ -20,7 +27,7 @@ namespace CRUD
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "CRUD"); });
             }
 
             app.UseHttpsRedirection();

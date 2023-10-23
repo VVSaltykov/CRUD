@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRUD.Controllers
 {
-    public class BaseCrudController<T> : ControllerBase, IBaseCrudController<T> where T : BaseEntity
+    [Route("/api/[controller]")]
+    [ApiController]
+    public class BaseCrudController<T> : Controller, IBaseCrudController<T> where T : BaseEntity
     {
         private readonly IBaseCrudRepository<T> _repository;
 

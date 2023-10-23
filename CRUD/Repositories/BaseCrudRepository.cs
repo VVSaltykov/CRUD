@@ -7,9 +7,9 @@ namespace CRUD.Repositories
 {
     public class BaseCrudRepository<T> : IBaseCrudRepository<T> where T : BaseEntity
     {
-        private readonly DbContext dbContext;
+        private readonly ApplicationContext dbContext;
 
-        public BaseCrudRepository(DbContext dbContext)
+        public BaseCrudRepository(ApplicationContext dbContext)
         {
             this.dbContext = dbContext;
         }
